@@ -29,13 +29,13 @@ class CombVectorCalc():
     """ 
     if isinstance(n,int) and isinstance(m,int) and isinstance(x,int):
       if n <= 0 or m < 0 or m > n or x <= 0 or x > comb(n,m):
-        raise ValueError
+        raise ValueError('input parameter error')
       if m == 0:
-        return None
+        return []
       self.vector = []
       self._number_selection_recursion(n,m,x)
       return [y-1 for y in self.vector]
-    raise TypeError
+    raise TypeError('input parameter error')
   
 def _make_combination_number_list(self,n,m):
   """
@@ -109,14 +109,14 @@ class CombVectorSample():
     """
     if isinstance(n,int) and isinstance(m,int) and isinstance(count,int):
       if n <= 0 or m <= 0 or m > n or count <= 0:
-        raise ValueError
+        raise ValueError('input parameter error')
       self._sample_natural_from_combination_range(low=comb(n,m),size=count)
       cv_calc = CombVectorCalc()
       self.vectors = []
       for pos in self.naturals:
         self.vectors.append(cv_calc.Get_comb_vector(n,m,pos))
       return self.vectors
-    raise TypeError
+    raise TypeError('input parameter error')
   
   def _sample_natural_from_combination_range(self,low,high=None,size=1):
     """
@@ -135,7 +135,7 @@ class CombVectorSample():
       a = low
       b = high
     else:
-      raise ValueError  
+      raise ValueError('input parameter error')  
     self.naturals = []
     while size > 0:
       t = rd.randint(a,b)
