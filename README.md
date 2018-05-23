@@ -5,7 +5,7 @@ As all Know, itertools.combinations() function is a Generator. It use to generat
 
 Sometimes if you want use this function to sample some vectors from all combination complete set, you have to put the itertools.combinations() to list() function to make a complete set of all combination vectors. And then use random.sample() function to get the sample of vectors. 
 
-But this way waste lots of times and huge memory space. For solve this problem, I find a different way to sample combination vectors. The itertools.combinations() function generate vectors with orders. Hence we can use the position of vector on complete combination vector set to calculate the number selection of each dimention of vector. So we just need sample vector position on complete combination vector set randomly. It is fast and less memory need. 
+But this way waste lots of times and huge memory space. For solve this problem, I find a different way to sample combination vectors. The itertools.combinations() function generate vectors with sequential. Hence we can use the position of vector on complete combination vector set to calculate the number selection of each dimention of vector. So we just need sample vector position on complete combination vector set randomly. It is fast and less memory need. 
 
 This way need using Combination Recursive Algorithm to calculate the number selection. It is shown below:
 
