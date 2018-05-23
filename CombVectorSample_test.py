@@ -1,0 +1,2 @@
+import unittest
+from CombVectorSample import GetCombVector
