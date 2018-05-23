@@ -28,8 +28,10 @@ class CombVectorCalc():
         [1,3,4] 
     """ 
     if isinstance(n,int) and isinstance(m,int) and isinstance(x,int):
-      if n <= 0 or m <= 0 or m > n or x <= 0 or x > comb(n,m):
+      if n <= 0 or m < 0 or m > n or x <= 0 or x > comb(n,m):
         raise ValueError
+      if m == 0:
+        return None
       self.vector = []
       self._number_selection_recursion(n,m,x)
       return [y-1 for y in self.vector]
