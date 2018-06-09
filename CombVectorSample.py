@@ -11,7 +11,7 @@ class CombVectorCalc():
   	A Class to calculate a combination vector by it's positon on complete combination set
   	"""
   	def __init__(self):
-    	self.vector = None
+    	self._vector = None
     
   	def Get_comb_vector(self,n,m,x):
     	"""  
@@ -32,9 +32,9 @@ class CombVectorCalc():
         		raise ValueError('input parameter error')
       		if m == 0:
         		return ()
-      		self.vector = []
+      		self._vector = []
       		self._number_selection_recursion(n,m,x)
-      		return tuple(y-1 for y in self.vector)
+      		return tuple(y-1 for y in self._vector)
     	raise TypeError('input parameter error %s, %s, %s' % (type(n),type(m),type(x)))
 
 	def _make_combination_number_list(self,n,m):
@@ -61,41 +61,41 @@ class CombVectorCalc():
 			m, combination selection number 
 			x, vector position on the complete set
 		return:
-			self.vectors, store dimension by a list
+			self._vectors, store dimension by a list
 		"""
 		if m == 1:
 			s = x
-			if len(self.vector) > 0:
-		  		s = self.vector[-1] + x
-			self.vector.append(s)
-			return self.vector
+			if len(self._vector) > 0:
+		  		s = self._vector[-1] + x
+			self._vector.append(s)
+			return self._vector
 		comb_ls = self._make_combination_number_list(n,m)
 		for i in range(len(comb_ls)):
 			if x == comb_ls[i]:
 		  		s = 0
-		  		if len(self.vector) > 0:
-					s = self.vector[-1]
-		  		self.vector.append(s + i)
+		  		if len(self._vector) > 0:
+					s = self._vector[-1]
+		  		self._vector.append(s + i)
 		  		m -= 1
 		  		for j in range(m,0,-1):
-					self.vector.append(n-j+1+s)
-		  		return self.vector
+					self._vector.append(n-j+1+s)
+		  		return self._vector
 			elif x < comb_ls[i]:
 		  		s = i
-		  		if len(self.vector) > 0:
-					s = self.vector[-1] + i
-		  		self.vector.append(s)
+		  		if len(self._vector) > 0:
+					s = self._vector[-1] + i
+		  		self._vector.append(s)
 		  		break
 		self._number_selection_recursion(n-i,m-1,x-comb_ls[i-1])
-		return self.vector
+		return self._vector
 
 class CombVectorSample():
 	"""
 	A class to sample a group combination vectors from complete combination vector set
 	"""
 	def __init__(self):
-		self.naturals = None
-		self.vectors = None
+		self._naturals = None
+		self._vectors = None
 
 	def Sample_comb_vectors(self,n,m=1,count=1):
 		"""
@@ -112,10 +112,10 @@ class CombVectorSample():
 				raise ValueError('input parameter error')
 		  	self._sample_natural_from_combination_range(low=comb(n,m),size=count)
 		  	cv_calc = CombVectorCalc()
-		  	self.vectors = []
-		  	for pos in self.naturals:
-				self.vectors.append(cv_calc.Get_comb_vector(n,m,pos))
-		  	return self.vectors
+		  	self._vectors = []
+		  	for pos in self._naturals:
+				self._vectors.append(cv_calc.Get_comb_vector(n,m,pos))
+		  	return self._vectors
 		raise TypeError('input parameter error %s, %s, %s' % (type(n),type(m),type(count)))
 
 	def _sample_natural_from_combination_range(self,low,high=None,size=1):
@@ -139,8 +139,7 @@ class CombVectorSample():
 		self.naturals = []
 		while size > 0:
 		  	t = rd.randint(a,b)
-		  	if t not in self.naturals:
-				self.naturals.append(t)
+		  	if t not in self._naturals:
+				self._naturals.append(t)
 				size -= 1
-  
-    
+			
